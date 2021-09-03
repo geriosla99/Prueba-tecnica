@@ -44,7 +44,7 @@ const Login = () => {
                             alt='googlebutton'
                             />
                         </Card.Text>
-                        <Button variant="primary">Inicia sesión</Button>
+                        <Button variant="primary" className='mx-3'>Inicia sesión</Button>
                         <Button variant="primary" onClick={handleClick}>¿Aun no tienes cuenta? Registrate aquí!</Button>
                     </Card.Body>
                 </Card>) : (<Signup/>)}

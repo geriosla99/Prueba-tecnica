@@ -1,7 +1,14 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import { Container, Card, Form, Button, FloatingLabel } from 'react-bootstrap'
 
 const SignUp = () => {
+
+    const history = useHistory();
+    const handleReturn = (e) => {
+        history.push('/');
+    };
+
     return (
         <>
             <Container>
@@ -61,7 +68,8 @@ const SignUp = () => {
                                 </FloatingLabel>
                         </Form.Group> 
                         </Card.Text>
-                        <Button variant="primary">Ya estas registrado? Inicia sesión aquí</Button>
+                        <Button variant="primary" className='mx-3'>Registrate</Button>
+                        <Button variant="primary" onClick={handleReturn}>Ya estas registrado? Inicia sesión aquí</Button>
                     </Card.Body>
                 </Card>
             </Container>           
