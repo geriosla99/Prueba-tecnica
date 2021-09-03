@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Card, Form, Button } from 'react-bootstrap'
+import Signup from './Signup';
 
 const Login = () => {
+
+    const [show, setShow] = useState(false);
+    const handleClick = () => {
+        setShow(true);
+      };
+    
     return (
         <>
-            <Container>
+            <Container className='my-3'>
+               {!show ? (
                 <Card>
                     <Card.Header as="h5">Iniciar sesión</Card.Header>
                     <Card.Body>
@@ -37,8 +45,9 @@ const Login = () => {
                             />
                         </Card.Text>
                         <Button variant="primary">Inicia sesión</Button>
+                        <Button variant="primary" onClick={handleClick}>¿Aun no tienes cuenta? Registrate aquí!</Button>
                     </Card.Body>
-                </Card>
+                </Card>) : (<Signup/>)}
             </Container>
         </>
     )
