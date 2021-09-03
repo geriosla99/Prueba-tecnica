@@ -10,7 +10,7 @@ Este es un proyecto se basa en el consumo de una Api y CRUD
 
 ## En funcionamiento 
 
-1. Para correr el proyecto usa el comando ```yarn start``` y levantar el servidor con ```json-server --watch products.json --port 3004```
+1. Para correr el proyecto usa el comando ```yarn start```
 2. Visita http://localhost:3000/
 3. Disfruta ;)
 
