@@ -1,22 +1,57 @@
 import {types} from '../Types/types'
-import firebase from '../firebase/firebaseConfig'
+import { firebase, google, db } from "../firebase/firebaseConfig";
 
-export const registerEmailPasswordName = ( name, email, pass ) =>{
+export const login = (id, displayName) => {
+    return {
+        type: types.login,
+        payload: {
+            id,
+            displayName
+        }
+    }
+}
 
-    return(dispatch)=>{
-        firebase.auth.createUserWithEmailAndPassword(email,pass)
-        .then( async({user})=>{
-            
-            console.log(user);
-            await user.updateProfile({displayName: name})
-            
+export const loginGoogle = () => {
+    return (dispatch) => {
+        firebase.auth().signInWithPopup(google)
+            .then(({ user }) => {
+                console.log(user);
+                dispatch(
+                    login(user.uid, user.displayName))
+            })
+    }
+}
+
+export const registroEmailPasswordName = (email, pass, name) => {
+    return (dispatch) => {
+        firebase.auth().createUserWithEmailAndPassword(email, pass)
+            .then(async ({ user }) => {
+                console.log(user);
+
+                await user.updateProfile({ displayName: name })
+
                 dispatch(
                     login(user.uid, user.displayName)
                 )
             })
-            .catch(e =>{
+            .catch(e => {
                 console.log(e);
             })
     }
+}
 
+//primera funcion asincrona
+export const loginEmailPassword = (email, password) => {
+    //devuelve un callback
+    return (dispatch) => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(({ user }) => {
+                dispatch(
+                    login(user.uid, user.displayName)
+                )
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
 }

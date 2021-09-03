@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Container, Card, Form, Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux';
+import { loginEmailPassword, loginGoogle } from '../../action/actionLogin';
+import { useForm } from '../../hooks/useForm';
 import Signup from './Signup';
 
 const Login = () => {
@@ -9,6 +12,25 @@ const Login = () => {
         setShow(true);
       };
     
+      const dispatch = useDispatch()
+
+    const [formValues, handleInputChange] = useForm({
+        email: '',
+        password: '',
+    })
+
+    const { email, password } = formValues
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+        dispatch(loginEmailPassword(email, password))
+    }
+
+    const handleLoginGoogle = () => {
+        dispatch(loginGoogle())
+    }
+
+
     return (
         <>
             <Container className='my-3'>
@@ -39,6 +61,7 @@ const Login = () => {
                         </Form.Group>
                         <Card.Text>
                             <img
+                            onClick={handleLoginGoogle}
                             className='google-icon'
                             src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
                             alt='googlebutton'
